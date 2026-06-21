@@ -1,0 +1,31 @@
+# This workflow will show how to display different type of messages in the workflow run logs.
+name: Workflow Commands
+on: [push]
+
+jobs:
+    tesing-wf-commands:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Display an error message
+              run: echo "::error::This is an error message"
+            - name: Display an error message with params
+              run: echo "::error title=Error Title, file=app.js, line=2, endLine=3, col=5, endColumn=7::This is an error message with param"
+            - name: Display a debug message with params
+              run: echo "::debug title=Debug Title, file=app.js, line=2, endLine=3, col=5, endColumn=7::This is a debug message with param"
+            - name: Display a warning message with params
+              run: echo "::warning title=Warning Title, file=app.js, line=2, endLine=3, col=5, endColumn=7::This is an error message with param"
+            - name: Display an notice message with params
+              run: echo "::notice title=Notice Title, file=app.js, line=2, endLine=3, col=5, endColumn=7::This is an notice message with param"
+            - name: Group of logs
+              run: |
+                echo "::group::My group title"
+                echo "Log 1"
+                echo "Log 2"
+                echo "::endgroup::"
+            - name: Masking a value
+              run: |
+                echo "::add-mask::my-secret-value"
+                echo "This is a secret value: my-secret-value"   # → prints "This is a secret value: ***"
+            - name: Echo a secret
+              run: echo "Secret String"
+            
